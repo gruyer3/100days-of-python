@@ -13,8 +13,10 @@ if direction == "left":
             print("Doors exploded. Game over.")
         else:
             ("You were supposed to open the door. Game over.")
-    else:
+    elif boat == "swim":
         print("You drowned. Game over.")
+    else:
+        print("You got attacked by a tiger. Game over.")
 else:
     print("You're lost in the jungle. Game over.")
     
