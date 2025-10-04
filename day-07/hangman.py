@@ -1,33 +1,41 @@
 import random
+from hangman_words import word_list
+from hangman_art import stages, logo
 
-word_list = ["pepperoni", "cheddar", "anchois"]
+chosen_word = random.choice(word_list)
+lives = 6
+# generate list of underscores
+display = ["_" for i in chosen_word]
+status = True
+history = []
 
-word_to_guess = random.choice(word_list)
-placeholder = ""
+print(logo)
+while status is True:
+    print(stages[lives])
+    print(f"{' '.join(display)}")
+    guess = input("Guess a letter: \n").lower()
 
-for letter in word_to_guess:
-    placeholder += "_"
-print(placeholder)
+    if guess in history:
+        print("You already tried this letter.")
 
-game_over = False
-correct_letters = []
+    history.append(guess)
 
-while True:
+    if guess not in chosen_word:
+        if lives == 0:
+            print("Game Over")
+            print(f"The word was: {chosen_word}")
+            status = False
+            break
+        lives -= 1
+        print(f"You guessed {guess}, which is not in the word. You lose a life.")
 
-    user_choice = input("Guess a letter: ").lower()
-
-    display = ""
-    for letter in word_to_guess:
-        if letter == user_choice:
-            display += user_choice
-            correct_letters.append(letter)
-        elif letter in correct_letters:
-            display += letter
-        else:
-            display += "_"
-
-    print(display)
+    # check if the letter is in the word
+    for i in range(len(chosen_word)):
+        letter = chosen_word[i]
+        if letter == guess:
+            display[i] = letter
 
     if "_" not in display:
-        game_over = True
-        print("You won!")
+        print(f"{' '.join(display)}")
+        status = False
+        print("You Win")
