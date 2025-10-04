@@ -9,13 +9,25 @@ for letter in word_to_guess:
     placeholder += "_"
 print(placeholder)
 
-user_choice = input("Guess a letter: ").lower()
+game_over = False
+correct_letters = []
 
-display = ""
-for letter in word_to_guess:
-    if letter == user_choice:
-        display += user_choice
-    else:
-        display += "_"
+while True:
 
-print(display)
+    user_choice = input("Guess a letter: ").lower()
+
+    display = ""
+    for letter in word_to_guess:
+        if letter == user_choice:
+            display += user_choice
+            correct_letters.append(letter)
+        elif letter in correct_letters:
+            display += letter
+        else:
+            display += "_"
+
+    print(display)
+
+    if "_" not in display:
+        game_over = True
+        print("You won!")
