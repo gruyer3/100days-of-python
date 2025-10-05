@@ -8,8 +8,9 @@ def encrypt(text, shift):
     result = ""
     for letter in text:
         alphabet_position = alphabet.index(letter) + shift
+        alphabet_position %= len(alphabet)
         result += alphabet[alphabet_position]
 
     print(result)
 
-encrypt("asdasdasd", 3)
+encrypt("z", 3)
