@@ -1,26 +1,27 @@
 from alphabet import alphabet
 
-#direction = input("Type 'encode to encrypt, type 'decode' to decrypt:\n").lower()
-#text = input("Type your message:\n").lower()
-#shift = int(input("Type the shift number:\n"))
+run = True
 
-
-def encrypt(text, shift):
+def caesar(direction, text, shift):
     result = ""
     for letter in text:
-        alphabet_position = alphabet.index(letter) + shift
+        if direction == "encode":
+            alphabet_position = alphabet.index(letter) + shift
+        if direction == "decode":
+            alphabet_position = alphabet.index(letter) - shift
         alphabet_position %= len(alphabet)
         result += alphabet[alphabet_position]
-    print(result)
+    print(f"Here is the {direction}d result:\n{result}")
 
-def decrypt(text, shift):
-    result = ""
-    for letter in text:
-        alphabet_position = alphabet.index(letter) - shift
-        alphabet_position %= len(alphabet)
-        result += alphabet[alphabet_position]
-    print(result)
+while run == True:
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
 
+    caesar(direction, text, shift)
 
-#encrypt("z", 3)
-#decrypt("a", 24)
+    another_word = input("Do you wish do proceed with another word? Type 'Y' to continue or 'N' to exit:\n").lower()
+
+    if another_word == "n":
+        run = False
+        print("Bye.")
