@@ -5,10 +5,13 @@ run = True
 def caesar(direction, text, shift):
     result = ""
     for letter in text:
-        if direction == "encode":
-            alphabet_position = alphabet.index(letter) + shift
-        if direction == "decode":
-            alphabet_position = alphabet.index(letter) - shift
+        if letter not in alphabet:
+            result += letter
+        else:
+            if direction == "encode":
+                alphabet_position = alphabet.index(letter) + shift
+            if direction == "decode":
+                alphabet_position = alphabet.index(letter) - shift
         alphabet_position %= len(alphabet)
         result += alphabet[alphabet_position]
     print(f"Here is the {direction}d result:\n{result}")
