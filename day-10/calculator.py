@@ -1,28 +1,27 @@
-def add(n1, n2):
-    return n1 + n2
+from logo import logo
+from functions import add, subtract, multiply, divide, calculations
 
-def subtract(n1, n2):
-    return n1 - n2
+def calculator():
+    print(logo)
+    num1 = float(input("What's the first number?: "))
+    for key in calculations:
+        print(key)
+    running = True
 
-def multiply(n1, n2):
-    return n1 * n2
+    while running:
+        operation = input("Pick an operation: ")
+        num2 = float(input("What's the next number?: "))
+        task = calculations[operation]
+        answer = task(num1, num2)
+        print(f"{num1} {operation} {num2} = {answer}")
 
-def divide(n1, n2):
-    return n1 / n2
+        continuity = input(f"Type 'y' to continue calculating with {num2}, or type 'n' to start a new calculation.: ")
 
-calculations = {
-    "+": add, 
-    "-": subtract, 
-    "*": multiply, 
-    "/": divide
-    }
+        if  continuity == 'y':
+            num1 = answer
+        else:
+            running = False
+            calculator()
 
-n1 = float(input("Number 1: "))
-operation = input("Operation: ")
-n2 = float(input("Number 2: "))
 
-def result():
-    return calculations[operation](n1, n2)
-
-print(result())
-
+calculator()
